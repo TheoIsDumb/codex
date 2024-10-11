@@ -2,6 +2,7 @@ import QtQuick 2.15
 import QtQuick.Layouts 1.15
 
 Rectangle {
+    id: id
     Layout.fillWidth: true
     height: parent.height
     radius: 15
@@ -45,6 +46,7 @@ Rectangle {
         ]
     }
 
+    property string id: ""
     property string title: ""
     property string content: ""
 }

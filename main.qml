@@ -55,16 +55,19 @@ ApplicationWindow {
                         spacing: 15
 
                         TopBox {
+                            id: ram
                             title: "RAM"
                             content: "1.6/4.0 GB"
                         }
 
                         TopBox {
+                            id: cpu
                             title: "CPU"
                             content: "25%"
                         }
 
                         TopBox {
+                            id: disk
                             title: "Disk"
                             content: "40%"
                         }
