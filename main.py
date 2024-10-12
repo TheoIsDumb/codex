@@ -44,6 +44,6 @@ if __name__ == "__main__":
     timer.start()
 
     fetchRAM()
-    fetchCPU()
+    # fetchCPU()
     fetchDisk()
     sys.exit(app.exec())

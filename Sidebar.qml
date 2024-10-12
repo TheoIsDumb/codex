@@ -9,4 +9,11 @@ Rectangle {
     color: "black"
     opacity: 0.7
     radius: 15
+    x: -150
+
+    SmoothedAnimation on x {
+        to: 0
+        duration: 800
+        easing.type: Easing.InOutCubic
+	}
 }

@@ -43,18 +43,21 @@ ApplicationWindow {
                             id: ram
                             title: "RAM"
                             content: mem 
+                            animDuration: 800
                         }
 
                         TopBox {
                             id: cpu
                             title: "CPU"
                             content: cpuData
+                            animDuration: 1200
                         }
 
                         TopBox {
                             id: disk
                             title: "Disk"
                             content: diskUsageData
+                            animDuration: 1600
                         }
 
                     }

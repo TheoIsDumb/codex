@@ -8,6 +8,13 @@ Rectangle {
     radius: 15
     border.color: "#737373"
     border.width: 2
+    y: -150
+
+    NumberAnimation on y {
+        to: 0
+        duration: animDuration
+        easing.type: Easing.InOutCubic
+	}
 
     ColumnLayout {
         anchors.fill: parent
@@ -50,4 +57,5 @@ Rectangle {
     property string id: ""
     property string title: ""
     property string content: ""
+    property int animDuration: 800
 }
