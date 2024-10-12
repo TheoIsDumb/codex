@@ -6,6 +6,10 @@ ApplicationWindow {
     visible: true
     title: "Taskie"
 
+    property string mem: "--/-- GB"
+    property string cpuData: "--%"
+    property string diskUsageData: "--%"
+
     Background {}
 
     Row {
@@ -38,19 +42,19 @@ ApplicationWindow {
                         TopBox {
                             id: ram
                             title: "RAM"
-                            content: "1.6/4.0 GB"
+                            content: mem 
                         }
 
                         TopBox {
                             id: cpu
                             title: "CPU"
-                            content: "25%"
+                            content: cpuData
                         }
 
                         TopBox {
                             id: disk
                             title: "Disk"
-                            content: "40%"
+                            content: diskUsageData
                         }
 
                     }

@@ -16,6 +16,7 @@ Rectangle {
 
         Text {
             text: title
+            font.bold: true
             color: "white"
             font.family: "PP Supply Mono"
         }
@@ -26,7 +27,7 @@ Rectangle {
 
         Text {
             text: content
-            font.pixelSize: 50
+            font.pixelSize: 40
             font.bold: true
             color: "white"
             font.family: "PP Supply Mono"
