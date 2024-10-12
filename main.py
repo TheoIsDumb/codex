@@ -40,7 +40,7 @@ if __name__ == "__main__":
     timer = QTimer()
     timer.setInterval(1000)
     timer.timeout.connect(fetchRAM)
-    timer.timeout.connect(fetchCPU)
+    # timer.timeout.connect(fetchCPU)
     timer.start()
 
     fetchRAM()
