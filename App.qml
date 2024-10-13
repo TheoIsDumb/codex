@@ -14,29 +14,9 @@ ApplicationWindow {
     property string mem: "--/-- GB"
     property string cpuData: "--%"
     property string diskUsageData: "--%"
+    property string systemfetch: "--"
 
     Background {}
-
-    Button {
-        contentItem: Image {
-            source: "close.svg"
-            anchors.centerIn: parent
-        }
-
-        text: qsTr("Close")
-        display: AbstractButton.IconOnly
-
-        anchors.bottom: parent.bottom
-        anchors.right: parent.right
-        anchors.margins: 16
-        onClicked: {
-            Qt.quit();
-        }
-        background: Rectangle {
-            color: "transparent"
-        }
-
-    }
 
     Row {
         anchors.fill: parent
@@ -54,6 +34,26 @@ ApplicationWindow {
 
             Column {
                 anchors.fill: parent
+                spacing: 10
+
+                TopBar {}
+
+                Rectangle {
+                    width: parent.width
+                    height: 150
+                    color: "transparent"
+                    anchors.margins: 20
+                    border.color: "white"
+                    border.width: 1
+                    radius: 4
+
+                    CustomText {
+                        text: systemfetch
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.left: parent.left
+                        anchors.leftMargin: 15
+                    }
+                }
 
                 Rectangle {
                     height: 200

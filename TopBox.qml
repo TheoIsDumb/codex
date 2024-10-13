@@ -21,25 +21,17 @@ Rectangle {
         anchors.margins: 16
         spacing: 8
 
-        Text {
-            text: title
-            font.letterSpacing: -0.5
-            font.bold: true
-            color: "white"
-            font.family: "PP Supply Mono"
+        CustomText {
+            innerText: title
         }
 
         Item {
             Layout.fillHeight: true
         }
 
-        Text {
-            text: content
-            font.letterSpacing: -0.5
-            font.pixelSize: 40
-            font.bold: true
-            color: "white"
-            font.family: "PP Supply Mono"
+        CustomText {
+            innerText: content
+            pointSize: 28
         }
     }
 

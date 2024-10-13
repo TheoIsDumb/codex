@@ -6,6 +6,18 @@ from PySide6.QtQml import QQmlApplicationEngine
 from PySide6.QtCore import QTimer
 import psutil
 import os
+import platform
+
+def fetchSystemInfo():
+    os_info = platform.system()
+    host = platform.node()
+    kernel = platform.release()
+    shell = os.environ.get('SHELL', 'Unknown shell')
+    desktop_env = os.environ.get('XDG_CURRENT_DESKTOP', 'Unknown DE')
+
+    systemfetch = f"OS	 {os_info}\nHost	 {host}\nKernel	 {kernel}\nShell	 {shell}\nDE	 {desktop_env}"
+
+    engine.rootObjects()[0].setProperty('systemfetch', systemfetch)
 
 def fetchRAM():
     mem = psutil.virtual_memory()
@@ -47,4 +59,6 @@ if __name__ == "__main__":
     fetchRAM()
     # fetchCPU()
     fetchDisk()
+    fetchSystemInfo()
+
     sys.exit(app.exec())
