@@ -5,6 +5,7 @@ from PySide6.QtWidgets import QApplication
 from PySide6.QtQml import QQmlApplicationEngine
 from PySide6.QtCore import QTimer
 import psutil
+import os
 
 def fetchRAM():
     mem = psutil.virtual_memory()
@@ -32,7 +33,7 @@ if __name__ == "__main__":
     app = QApplication(sys.argv)
 
     engine = QQmlApplicationEngine()
-    engine.load("App.qml")
+    engine.load(os.path.dirname(os.path.abspath(__file__)) + "/" + "App.qml")
 
     if not engine.rootObjects():
         sys.exit(-1)
