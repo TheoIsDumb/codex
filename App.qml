@@ -12,6 +12,7 @@ ApplicationWindow {
     maximumHeight: 800
     flags: Qt.FramelessWindowHint
 
+    property string currentPage: "Overview"
     property string mem: "--/-- GB"
     property string cpuData: "--%"
     property string diskUsageData: "--%"
@@ -57,7 +58,10 @@ ApplicationWindow {
                     text: qsTr("Close")
                     display: AbstractButton.IconOnly
                 
-                    onClicked: loader.sourceComponent = overview
+                    onClicked: {
+                        loader.sourceComponent = overview
+                        currentPage = "Overview"
+                    }
 
                     background: MouseArea {
                         anchors.fill: parent
@@ -78,7 +82,10 @@ ApplicationWindow {
                     text: qsTr("Close")
                     display: AbstractButton.IconOnly
                 
-                    onClicked: loader.sourceComponent = cpu
+                    onClicked: {
+                        loader.sourceComponent = cpu
+                        currentPage = "CPU"
+                    }
 
                     background: MouseArea {
                         anchors.fill: parent
@@ -90,14 +97,44 @@ ApplicationWindow {
                     }
                 }
             }
-        }
+        } // SIDEBAR
 
         // this column holds the topbar and the content body
         ColumnLayout {
             width: parent.width - 95
             spacing: 10
 
-            TopBar {}
+            // TOPBAR
+            RowLayout {
+                width: parent.width
+
+                CustomText {
+                    innerText: "CODEX" + " - " + currentPage
+                }
+
+                Item {
+                    Layout.fillWidth: true
+                }
+
+                Button {
+                    contentItem: Image {
+                        source: "icons/close.svg"
+                        anchors.centerIn: parent
+                    }
+                    anchors.bottomMargin: 10.0
+
+                    text: qsTr("Close")
+                    display: AbstractButton.IconOnly
+
+                    onClicked: {
+                        Qt.quit();
+                    }
+                    background: Rectangle {
+                        color: "transparent"
+                    }
+                }
+            } // TOPBAR
+
 
             Loader {
                 id: loader
