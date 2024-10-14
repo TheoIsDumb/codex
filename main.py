@@ -7,6 +7,7 @@ from PySide6.QtCore import QTimer
 import psutil
 import os
 import platform
+import subprocess
 
 def fetchSystemInfo():
     os_info = platform.system()
@@ -19,13 +20,17 @@ def fetchSystemInfo():
 
     engine.rootObjects()[0].setProperty('systemfetch', systemfetch)
 
+def fetchCPU():
+    result = subprocess.run(['lscpu', '-J'], check=True, capture_output=True, text=True)
+    engine.rootObjects()[0].setProperty('cpuJSON', result.stdout)
+
 def fetchRAM():
     mem = psutil.virtual_memory()
     memData = f"{mem.used / 1e9:.1f}/{mem.total / 1e9:.1f}GB"
     engine.rootObjects()[0].setProperty('mem', memData)
 
-def fetchCPU():
-    engine.rootObjects()[0].setProperty('cpuData', f"{psutil.cpu_percent(1)}%")
+# def fetchCPU():
+#     engine.rootObjects()[0].setProperty('cpuData', f"{psutil.cpu_percent(1)}%")
 
 def fetchDisk():
     total_used = 0
@@ -57,7 +62,7 @@ if __name__ == "__main__":
     timer.start()
 
     fetchRAM()
-    # fetchCPU()
+    fetchCPU()
     fetchDisk()
     fetchSystemInfo()
 

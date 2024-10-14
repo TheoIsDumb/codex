@@ -15,7 +15,7 @@ RowLayout {
 
     Button {
         contentItem: Image {
-            source: "close.svg"
+            source: "icons/close.svg"
             anchors.centerIn: parent
         }
         anchors.bottomMargin: 10.0
@@ -29,6 +29,5 @@ RowLayout {
         background: Rectangle {
             color: "transparent"
         }
-    
     }
 }
