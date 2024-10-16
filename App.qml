@@ -129,8 +129,13 @@ ApplicationWindow {
                     onClicked: {
                         Qt.quit();
                     }
-                    background: Rectangle {
-                        color: "transparent"
+                    background: MouseArea {
+                        anchors.fill: parent
+                        cursorShape: Qt.PointingHandCursor
+
+                        Rectangle {
+                            color: "transparent"
+                        }
                     }
                 }
             } // TOPBAR
@@ -207,11 +212,74 @@ ApplicationWindow {
     Component {
         id: cpu
 
-        Rectangle {
+        Column {
+            height: parent.width
+            width: parent.width
+            spacing: 20
+
             property var parsed: JSON.parse(cpuJSON)
 
-            CustomText {
-                text: parsed.lscpu[0].data
+            Rectangle {
+                height: 200
+                width: parent.width
+                radius: 15
+                color: "transparent"
+
+                RowLayout {
+                    height: 200
+                    width: parent.width
+                    spacing: 10
+
+                    TopBox {
+                        id: arch
+                        title: "Arch"
+                        content: parsed.lscpu[0].data 
+                        animDuration: 800
+                    }
+
+                    TopBox {
+                        id: cpu_model
+                        title: "CPU Mode"
+                        content: parsed.lscpu[1].data 
+                        animDuration: 1200
+                    }
+                }
+            }
+
+            Rectangle {
+                width: parent.width
+                height: 1
+                color: "gray"
+            }
+
+            ScrollView {
+                width: parent.width
+                height: 500
+
+                // CustomText {
+                //     text: JSON.stringify(parsed.lscpu, null, 2)
+                // }
+
+                Column {
+                    anchors.fill: parent
+                    spacing: 10
+                    padding: 10
+
+                    Repeater {
+                        model: parsed.lscpu.length
+
+                        Column {
+                            CustomText {
+                                text: parsed.lscpu[index].field
+                                color: "white"
+                            }
+                            CustomText {
+                                text: parsed.lscpu[index].data
+                                color: "lightgray"
+                            }
+                        }
+                    }
+                }
             }
         }
     }

@@ -20,7 +20,7 @@ def fetchSystemInfo():
 
     engine.rootObjects()[0].setProperty('systemfetch', systemfetch)
 
-def fetchCPU():
+def fetchCPUDetails():
     result = subprocess.run(['lscpu', '-J'], check=True, capture_output=True, text=True)
     engine.rootObjects()[0].setProperty('cpuJSON', result.stdout)
 
@@ -29,8 +29,8 @@ def fetchRAM():
     memData = f"{mem.used / 1e9:.1f}/{mem.total / 1e9:.1f}GB"
     engine.rootObjects()[0].setProperty('mem', memData)
 
-# def fetchCPU():
-#     engine.rootObjects()[0].setProperty('cpuData', f"{psutil.cpu_percent(1)}%")
+def fetchCPUUsage():
+    engine.rootObjects()[0].setProperty('cpuData', f"{psutil.cpu_percent()}%")
 
 def fetchDisk():
     total_used = 0
@@ -58,12 +58,14 @@ if __name__ == "__main__":
     timer = QTimer()
     timer.setInterval(1000)
     timer.timeout.connect(fetchRAM)
-    # timer.timeout.connect(fetchCPU)
+    timer.timeout.connect(fetchCPUUsage)
     timer.start()
 
     fetchRAM()
-    fetchCPU()
     fetchDisk()
+    fetchCPUUsage()
     fetchSystemInfo()
+
+    fetchCPUDetails()
 
     sys.exit(app.exec())
