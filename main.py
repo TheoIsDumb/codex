@@ -24,6 +24,10 @@ def fetchCPUDetails():
     result = subprocess.run(['lscpu', '-J'], check=True, capture_output=True, text=True)
     engine.rootObjects()[0].setProperty('cpuJSON', result.stdout)
 
+def fetchNetworkDetails():
+    result = subprocess.run(['ip', '-json', 'a'], check=True, capture_output=True, text=True)
+    engine.rootObjects()[0].setProperty('ipJSON', result.stdout)
+
 def fetchRAM():
     mem = psutil.virtual_memory()
     memData = f"{mem.used / 1e9:.1f}/{mem.total / 1e9:.1f}GB"
@@ -67,5 +71,6 @@ if __name__ == "__main__":
     fetchSystemInfo()
 
     fetchCPUDetails()
+    fetchNetworkDetails()
 
     sys.exit(app.exec())

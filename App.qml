@@ -18,6 +18,7 @@ ApplicationWindow {
     property string diskUsageData: "--%"
     property string systemfetch: "--"
     property string cpuJSON: ""
+    property string ipJSON: ""
 
     Background {}
 
@@ -36,11 +37,11 @@ ApplicationWindow {
             color: "black"
             opacity: 0.7
             radius: 15
-            x: -150
+            x: -100
 
             SmoothedAnimation on x {
                 to: 0
-                duration: 800
+                duration: 600
                 easing.type: Easing.InOutCubic
             }
 
@@ -96,6 +97,30 @@ ApplicationWindow {
                         }
                     }
                 }
+
+                Button {
+                    contentItem: Image {
+                        source: "icons/network.svg"
+                        anchors.centerIn: parent
+                    }
+                
+                    text: qsTr("Close")
+                    display: AbstractButton.IconOnly
+                
+                    onClicked: {
+                        loader.sourceComponent = network
+                        currentPage = "Network"
+                    }
+
+                    background: MouseArea {
+                        anchors.fill: parent
+                        cursorShape: Qt.PointingHandCursor
+
+                        Rectangle {
+                            color: "transparent"
+                        }
+                    }
+                }
             }
         } // SIDEBAR
 
@@ -107,6 +132,13 @@ ApplicationWindow {
             // TOPBAR
             RowLayout {
                 width: parent.width
+                y: -150
+
+                NumberAnimation on y {
+                    to: 0
+                    duration: 600
+                    easing.type: Easing.InOutCubic
+                }
 
                 CustomText {
                     innerText: "CODEX" + " - " + currentPage
@@ -276,6 +308,65 @@ ApplicationWindow {
                             CustomText {
                                 text: parsed.lscpu[index].data
                                 color: "lightgray"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    } // cpu
+
+    Component {
+        id: network
+
+        Column {
+            width: parent.width
+            height: parent.height
+            spacing: 10
+
+            property var parsed: JSON.parse(ipJSON)
+
+            Rectangle {
+                width: parent.width
+                color: "transparent"
+                height: 200
+
+                Column {
+                    anchors.fill: parent
+                    spacing: 10
+                    padding: 10
+
+                    Repeater {
+                        model: parsed.length
+
+                        Row {
+                            spacing: 20
+
+                            CustomText {
+                                text: parsed[index].ifindex
+                                color: "white"
+                                pointSize: 80
+                            }
+
+                            Column {
+                                spacing: 5
+
+                                CustomText {
+                                    text: parsed[index].ifname
+                                    color: "lightgray"
+                                }
+                                CustomText {
+                                    text: parsed[index].addr_info[0].local
+                                    color: "lightgray"
+                                }
+                                CustomText {
+                                    text: parsed[index].addr_info[1].local
+                                    color: "lightgray"
+                                }
+                                CustomText {
+                                    text: parsed[index].address
+                                    color: "lightgray"
+                                }
                             }
                         }
                     }

@@ -10,12 +10,6 @@ Rectangle {
     border.width: 2
     y: -150
 
-	//   NumberAnimation on y {
-	//       to: 0
-	//       duration: animDuration
-	//       easing.type: Easing.InOutCubic
-	//}
-
     ColumnLayout {
         anchors.fill: parent
         anchors.margins: 16
