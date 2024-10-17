@@ -28,6 +28,10 @@ def fetchNetworkDetails():
     result = subprocess.run(['ip', '-json', 'a'], check=True, capture_output=True, text=True)
     engine.rootObjects()[0].setProperty('ipJSON', result.stdout)
 
+def fetchLSBLK():
+    result = subprocess.run(['lsblk', '-f', '--json'], check=True, capture_output=True, text=True)
+    engine.rootObjects()[0].setProperty('lsblkJSON', result.stdout)
+
 def fetchRAM():
     mem = psutil.virtual_memory()
     memData = f"{mem.used / 1e9:.1f}/{mem.total / 1e9:.1f}GB"
@@ -72,5 +76,7 @@ if __name__ == "__main__":
 
     fetchCPUDetails()
     fetchNetworkDetails()
+
+    fetchLSBLK()
 
     sys.exit(app.exec())

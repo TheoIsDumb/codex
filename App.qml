@@ -19,6 +19,7 @@ ApplicationWindow {
     property string systemfetch: "--"
     property string cpuJSON: ""
     property string ipJSON: ""
+    property string lsblkJSON: ""
 
     Background {}
 
@@ -110,6 +111,30 @@ ApplicationWindow {
                     onClicked: {
                         loader.sourceComponent = network
                         currentPage = "Network"
+                    }
+
+                    background: MouseArea {
+                        anchors.fill: parent
+                        cursorShape: Qt.PointingHandCursor
+
+                        Rectangle {
+                            color: "transparent"
+                        }
+                    }
+                }
+
+                Button {
+                    contentItem: Image {
+                        source: "icons/storage.svg"
+                        anchors.centerIn: parent
+                    }
+                
+                    text: qsTr("Close")
+                    display: AbstractButton.IconOnly
+                
+                    onClicked: {
+                        loader.sourceComponent = storage
+                        currentPage = "storage"
                     }
 
                     background: MouseArea {
@@ -288,10 +313,6 @@ ApplicationWindow {
                 width: parent.width
                 height: 500
 
-                // CustomText {
-                //     text: JSON.stringify(parsed.lscpu, null, 2)
-                // }
-
                 Column {
                     anchors.fill: parent
                     spacing: 10
@@ -372,6 +393,49 @@ ApplicationWindow {
                     }
                 }
             }
+        }
+    } // network
+
+    Component {
+        id: storage
+
+
+        ColumnLayout {
+            width: parent.width
+            height: parent.height
+            spacing: 10
+
+            property var parsed: JSON.parse(lsblkJSON).blockdevices
+
+            Column {
+                width: parent.width
+                spacing: 10
+
+                Repeater {
+                    model: parsed
+
+                    Repeater {
+                        model: modelData.children
+
+                        RowLayout {
+                            spacing: 20
+                            width: parent.width
+
+                            CustomText { text: modelData.name }
+                            CustomText { text: modelData.fstype }
+                            CustomText { text: modelData.fsavail }
+
+                            Item { Layout.fillWidth: true }
+
+                            ProgressBar {
+                                value: Number(modelData['fsuse%'].replace('%', '')/100)
+                                Layout.fillWidth: true
+                            }
+                        }
+                    }
+                }
+            }
+
         }
     }
 }
