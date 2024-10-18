@@ -428,8 +428,30 @@ ApplicationWindow {
                             Item { Layout.fillWidth: true }
 
                             ProgressBar {
+                                id: control
                                 value: Number(modelData['fsuse%'].replace('%', '')/100)
                                 Layout.fillWidth: true
+                                padding: 2
+
+                                background: Rectangle {
+                                    implicitWidth: 200
+                                    implicitHeight: 6
+                                    color: "gray"
+                                    radius: 10
+                                }
+
+                                contentItem: Item {
+                                    implicitWidth: 200
+                                    implicitHeight: 4
+
+                                    Rectangle {
+                                        anchors.leftMargin: -10
+                                        width: control.visualPosition * parent.width
+                                        height: parent.height
+                                        radius: 10
+                                        color: "lightgray"
+                                    }
+                                }
                             }
                         }
                     }
