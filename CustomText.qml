@@ -16,5 +16,5 @@ Text {
     font.pointSize: pointSize
 
     property string innerText: ""
-    property int pointSize: 14
+    property int pointSize: 15
 }

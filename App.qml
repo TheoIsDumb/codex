@@ -134,7 +134,7 @@ ApplicationWindow {
                 
                     onClicked: {
                         loader.sourceComponent = storage
-                        currentPage = "storage"
+                        currentPage = "Storage"
                     }
 
                     background: MouseArea {
@@ -411,6 +411,22 @@ ApplicationWindow {
                 width: parent.width
                 spacing: 10
 
+                RowLayout {
+                    width: parent.width
+
+                    CustomText {
+                        text: "Name" + "\t\t" +
+                            "FS Type" + "\t\t" +
+                            "FS Avail"
+                    }
+
+                    Item { Layout.fillWidth: true }
+
+                    CustomText {
+                        text: "Progress"
+                    }
+                }
+
                 Repeater {
                     model: parsed
 
@@ -421,16 +437,18 @@ ApplicationWindow {
                             spacing: 20
                             width: parent.width
 
-                            CustomText { text: modelData.name }
-                            CustomText { text: modelData.fstype }
-                            CustomText { text: modelData.fsavail }
+                            CustomText {
+                                text: modelData.name + "\t\t" +
+                                    modelData.fstype + "\t\t" +
+                                    modelData.fsavail
+                            }
 
                             Item { Layout.fillWidth: true }
 
                             ProgressBar {
                                 id: control
                                 value: Number(modelData['fsuse%'].replace('%', '')/100)
-                                Layout.fillWidth: true
+                                visible: modelData['fsuse%'] !== null
                                 padding: 2
 
                                 background: Rectangle {
