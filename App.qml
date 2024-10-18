@@ -13,6 +13,7 @@ ApplicationWindow {
     flags: Qt.FramelessWindowHint
 
     property string currentPage: "Overview"
+    property string username: ""
     property string mem: "--/-- GB"
     property string cpuData: "--%"
     property string diskUsageData: "--%"
@@ -218,6 +219,23 @@ ApplicationWindow {
                 width: parent.width
                 height: 150
                 color: "transparent"
+                border.color: "white"
+                border.width: 1
+                radius: 4
+
+                CustomText {
+                    text: "hi," + "\n" + username + "!"
+                    pointSize: 30
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.left: parent.left
+                    anchors.leftMargin: 15
+                }
+            }
+
+            Rectangle {
+                width: parent.width
+                height: 150
+                color: "transparent"
                 anchors.margins: 20
                 border.color: "white"
                 border.width: 1
@@ -398,7 +416,6 @@ ApplicationWindow {
 
     Component {
         id: storage
-
 
         ColumnLayout {
             width: parent.width

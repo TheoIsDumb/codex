@@ -8,6 +8,11 @@ import psutil
 import os
 import platform
 import subprocess
+import getpass
+
+## overview
+def fetchUsername():
+    engine.rootObjects()[0].setProperty('username', getpass.getuser())
 
 def fetchSystemInfo():
     os_info = platform.system()
@@ -19,18 +24,6 @@ def fetchSystemInfo():
     systemfetch = f"OS	 {os_info}\nHost	 {host}\nKernel	 {kernel}\nShell	 {shell}\nDE	 {desktop_env}"
 
     engine.rootObjects()[0].setProperty('systemfetch', systemfetch)
-
-def fetchCPUDetails():
-    result = subprocess.run(['lscpu', '-J'], check=True, capture_output=True, text=True)
-    engine.rootObjects()[0].setProperty('cpuJSON', result.stdout)
-
-def fetchNetworkDetails():
-    result = subprocess.run(['ip', '-json', 'a'], check=True, capture_output=True, text=True)
-    engine.rootObjects()[0].setProperty('ipJSON', result.stdout)
-
-def fetchLSBLK():
-    result = subprocess.run(['lsblk', '-f', '--json'], check=True, capture_output=True, text=True)
-    engine.rootObjects()[0].setProperty('lsblkJSON', result.stdout)
 
 def fetchRAM():
     mem = psutil.virtual_memory()
@@ -53,6 +46,22 @@ def fetchDisk():
 
     engine.rootObjects()[0].setProperty('diskUsageData', f"{total_percentage:.1f}%")
 
+## cpu
+def fetchCPUDetails():
+    result = subprocess.run(['lscpu', '-J'], check=True, capture_output=True, text=True)
+    engine.rootObjects()[0].setProperty('cpuJSON', result.stdout)
+
+## ip
+def fetchNetworkDetails():
+    result = subprocess.run(['ip', '-json', 'a'], check=True, capture_output=True, text=True)
+    engine.rootObjects()[0].setProperty('ipJSON', result.stdout)
+
+## storage
+def fetchLSBLK():
+    result = subprocess.run(['lsblk', '-f', '--json'], check=True, capture_output=True, text=True)
+    engine.rootObjects()[0].setProperty('lsblkJSON', result.stdout)
+
+############################################
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
@@ -70,6 +79,7 @@ if __name__ == "__main__":
     timer.start()
 
     fetchRAM()
+    fetchUsername()
     fetchDisk()
     fetchCPUUsage()
     fetchSystemInfo()
