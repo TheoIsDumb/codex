@@ -480,9 +480,11 @@ ApplicationWindow {
                                     implicitHeight: 4
 
                                     Rectangle {
-                                        anchors.leftMargin: -10
+                                        anchors.left: parent.left
+                                        anchors.leftMargin: -2
+                                        anchors.verticalCenter: parent.verticalCenter
                                         width: control.visualPosition * parent.width
-                                        height: parent.height
+                                        height: 10
                                         radius: 10
                                         color: "lightgray"
                                     }
