@@ -26,8 +26,16 @@ def fetchSystemInfo():
     engine.rootObjects()[0].setProperty('systemfetch', systemfetch)
 
 def fetchRAM():
-    mem = psutil.virtual_memory()
-    memData = f"{mem.used / 1e9:.1f}/{mem.total / 1e9:.1f}GB"
+    # mem = psutil.virtual_memory()
+    # memData = f"{mem.used / 1e9:.1f}/{mem.total / 1e9:.1f}GB"
+    result = subprocess.run(['free', '-m',], capture_output=True, text=True)
+
+    result = result.stdout.splitlines()[1].split()
+
+    total = int(result[2]) / 1024
+    used = int(result[1]) / 1024
+    memData = f"{total:.1f}/{used:.1f} GB"
+
     engine.rootObjects()[0].setProperty('mem', memData)
 
 def fetchCPUUsage():
