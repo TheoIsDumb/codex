@@ -548,13 +548,18 @@ ApplicationWindow {
                 }
 
                 ColumnLayout {
-                    spacing: 0
+                    spacing: 10
                     anchors.horizontalCenter: parent.horizontalCenter
 
                     CustomText {
                         Layout.alignment: Qt.AlignHCenter
                         text: "Codex"
                         pointSize: 20
+                    }
+
+                    CustomText {
+                        Layout.alignment: Qt.AlignHCenter
+                        text: "A system info utility for Linux."
                     }
                     
                     CustomText {
@@ -575,7 +580,6 @@ ApplicationWindow {
                         }
                 
                         text: qsTr("Source Code")
-                        // display: AbstractButton.IconOnly
                 
                         onClicked: {
                             Qt.openUrlExternally("https://github.com/theoisdumb/codex")

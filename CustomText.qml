@@ -4,12 +4,12 @@ import QtQuick.Layouts 1.15
 
 Text {
 	FontLoader {
-	        id: ari
-	        source: "ari.ttf"
+	        id: barlow
+	        source: "barlow.woff2"
 	}
 
     text: innerText
-    font.family: ari.name
+    font.family: barlow.name
     font.letterSpacing: -0.5
     font.bold: true
     color: "white"
