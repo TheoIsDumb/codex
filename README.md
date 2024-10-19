@@ -1,6 +1,8 @@
-# codex
+<p align="center>
+    <img src="codex.png" width="200">
+</p>
 
-![src.mp4]()
+<h1 align="center">codex</h1>
 
 a system info utility built with Qt6.
 
@@ -19,6 +21,7 @@ cd codex
 - pyside6
 
 ## commands used
+
 - lscpu
 - lsblk
 - ip
