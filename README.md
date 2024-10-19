@@ -2,6 +2,10 @@
 
 # codex
 
+
+https://github.com/user-attachments/assets/bcd6799f-dc16-402e-ba2a-1ad9dccb7218
+
+
 a system info utility built with Qt6.
 
 ## installation
