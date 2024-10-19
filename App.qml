@@ -5,7 +5,7 @@ import QtQuick.Layouts 1.15
 // ApplicationWindow
 ApplicationWindow {
     visible: true
-    title: "Taskie"
+    title: "Codex"
     minimumWidth: 1000
     minimumHeight: 800
     maximumWidth: 1000
