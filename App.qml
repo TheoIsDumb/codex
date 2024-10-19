@@ -539,9 +539,7 @@ ApplicationWindow {
             color: "transparent"
 
             Column {
-                spacing: -40
                 anchors.centerIn: parent
-                anchors.verticalCenter: parent.verticalCenter
 
                 Image {
                     source: "codex.png"
@@ -593,7 +591,6 @@ ApplicationWindow {
                         }
                     }
                 }
-
             }
         }
     }
