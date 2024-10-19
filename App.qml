@@ -539,7 +539,7 @@ ApplicationWindow {
             color: "transparent"
 
             Column {
-                anchors.centerIn: parent
+                anchors.horizontalCenter: parent.horizontalCenter
 
                 Image {
                     source: "codex.png"
