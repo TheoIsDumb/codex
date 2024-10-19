@@ -75,7 +75,7 @@ if __name__ == "__main__":
     app = QApplication(sys.argv)
 
     engine = QQmlApplicationEngine()
-    engine.load(os.path.dirname(os.path.abspath(__file__)) + "/" + "App.qml")
+    engine.load(os.path.dirname(os.path.realpath(__file__)) + "/" + "App.qml")
 
     if not engine.rootObjects():
         sys.exit(-1)

@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Name=Codex
+Comment=System Info Utility
+Exec=/usr/bin/codex
+Icon=/usr/lib/codex/codex.png
+Terminal=false
+Type=Application
+Categories=Utility;Application;
+

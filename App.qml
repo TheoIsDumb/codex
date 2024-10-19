@@ -47,10 +47,12 @@ ApplicationWindow {
                 easing.type: Easing.InOutCubic
             }
 
-            Column {
+            ColumnLayout {
                 spacing: 10
                 anchors.horizontalCenter: parent.horizontalCenter
-                padding: 20
+                anchors.top: parent.top
+                anchors.topMargin: 15
+                height: parent.height - 30
 
                 Button {
                     contentItem: Image {
@@ -147,6 +149,34 @@ ApplicationWindow {
                         }
                     }
                 }
+
+                Item {
+                    Layout.fillHeight: true
+                }
+
+                Button {
+                    contentItem: Image {
+                        source: "icons/info.svg"
+                        anchors.centerIn: parent
+                    }
+                
+                    text: qsTr("Info")
+                    display: AbstractButton.IconOnly
+                
+                    onClicked: {
+                        loader.sourceComponent = about
+                        currentPage = "About"
+                    }
+
+                    background: MouseArea {
+                        anchors.fill: parent
+                        cursorShape: Qt.PointingHandCursor
+
+                        Rectangle {
+                            color: "transparent"
+                        }
+                    }
+                }
             }
         } // SIDEBAR
 
@@ -202,6 +232,7 @@ ApplicationWindow {
             Loader {
                 id: loader
                 width: parent.width
+                height: parent.width
                 sourceComponent: overview
             }
         }
@@ -495,6 +526,75 @@ ApplicationWindow {
                 }
             }
 
+        }
+    }
+    
+    Component {
+        id: about
+
+        Rectangle {
+            width: parent.width
+            height: parent.height
+            anchors.fill: parent
+            color: "transparent"
+
+            Column {
+                spacing: -40
+                anchors.centerIn: parent
+                anchors.verticalCenter: parent.verticalCenter
+
+                Image {
+                    source: "codex.png"
+                    width: 400
+                    height: 400
+                }
+
+                ColumnLayout {
+                    spacing: 0
+                    anchors.horizontalCenter: parent.horizontalCenter
+
+                    CustomText {
+                        Layout.alignment: Qt.AlignHCenter
+                        text: "Codex"
+                        pointSize: 20
+                    }
+                    
+                    CustomText {
+                        Layout.alignment: Qt.AlignHCenter
+                        text: "Made by Theo."
+                    }
+
+                    Item {
+                        height: 20
+                    }
+
+                    Button {
+                        Layout.alignment: Qt.AlignHCenter
+
+                        contentItem: Image {
+                            source: "icons/github.svg"
+                            anchors.centerIn: parent
+                        }
+                
+                        text: qsTr("Source Code")
+                        // display: AbstractButton.IconOnly
+                
+                        onClicked: {
+                            Qt.openUrlExternally("https://github.com/theoisdumb/codex")
+                        }
+
+                        background: MouseArea {
+                            anchors.fill: parent
+                            cursorShape: Qt.PointingHandCursor
+
+                            Rectangle {
+                                color: "transparent"
+                            }
+                        }
+                    }
+                }
+
+            }
         }
     }
 }
