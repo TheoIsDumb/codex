@@ -1,6 +1,7 @@
 #!/bin/python3
 
 import sys
+from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QApplication
 from PySide6.QtQml import QQmlApplicationEngine
 from PySide6.QtCore import QTimer
@@ -26,8 +27,6 @@ def fetchSystemInfo():
     engine.rootObjects()[0].setProperty('systemfetch', systemfetch)
 
 def fetchRAM():
-    # mem = psutil.virtual_memory()
-    # memData = f"{mem.used / 1e9:.1f}/{mem.total / 1e9:.1f}GB"
     result = subprocess.run(['free', '-m',], capture_output=True, text=True)
 
     result = result.stdout.splitlines()[1].split()
@@ -73,6 +72,7 @@ def fetchLSBLK():
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
+    app.setWindowIcon(QIcon(os.path.dirname(os.path.realpath(__file__)) + "/" + "codex.png"))
 
     engine = QQmlApplicationEngine()
     engine.load(os.path.dirname(os.path.realpath(__file__)) + "/" + "App.qml")
