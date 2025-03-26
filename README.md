@@ -3,7 +3,8 @@
 # codex
 
 
-https://github.com/user-attachments/assets/bcd6799f-dc16-402e-ba2a-1ad9dccb7218
+https://github.com/user-attachments/assets/69398a69-f15a-471c-a1fb-52bcd232eac9
+
 
 
 a system info utility built with Qt6.
